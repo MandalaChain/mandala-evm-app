@@ -205,7 +205,7 @@ npm install
 
 2. Install Web3 dependencies:
 ```bash
-npm install ethers@5.7.2 web3modal
+npm install ethers@5.7.2 @ethersproject/providers
 ```
 
 ### Creating the dApp Interface
@@ -423,4 +423,3 @@ Building dApps on Polkadot's EVM allows developers to leverage their Ethereum de
 - [Foundry Book](https://book.getfoundry.sh/)
 - [Vue.js Documentation](https://vuejs.org/)
 - [ethers.js Documentation](https://docs.ethers.io/)
-- [Web3Modal Documentation](https://web3modal.com/)

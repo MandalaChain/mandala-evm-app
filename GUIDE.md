@@ -146,7 +146,7 @@ npm create vue@latest .
 # ✔ Add Prettier? Yes
 
 npm install
-npm install ethers@5.7.2 web3modal
+npm install ethers@5.7.2 @ethersproject/providers
 ```
 
 8. Create component in `frontend/src/components/ContractInterface.vue` (use the Vue component from the guide)
