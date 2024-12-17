@@ -1,6 +1,9 @@
 <template>
   <div class="contract-interface">
     <h1>MyContract dApp</h1>
+    <div v-if="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
     <div v-if="!isConnected">
       <button @click="connectWallet">Connect Wallet</button>
     </div>
@@ -36,13 +39,15 @@ export default defineComponent({
       contract: null as ethers.Contract | null,
       provider: null as ethers.providers.Web3Provider | null,
       signer: null as ethers.Signer | null,
+      errorMessage: '',
     }
   },
   methods: {
     async connectWallet() {
       try {
         if (!window.ethereum) {
-          throw new Error('MetaMask not installed!')
+          this.errorMessage = 'MetaMask not installed! Please install MetaMask to continue.';
+          return;
         }
         const provider = new ethers.providers.Web3Provider(window.ethereum)
         await provider.send('eth_requestAccounts', [])
@@ -53,10 +58,12 @@ export default defineComponent({
         this.isConnected = true
         this.provider = provider
         this.signer = signer
+        this.errorMessage = ''; // Clear any previous errors
 
         await this.updateValue()
       } catch (error) {
         console.error('Error connecting wallet:', error)
+        this.errorMessage = `Failed to connect wallet: ${error instanceof Error ? error.message : 'Unknown error'}`;
       }
     },
 
@@ -89,6 +96,15 @@ export default defineComponent({
   margin: 0 auto;
   padding: 20px;
   text-align: center;
+}
+
+.error-message {
+  color: red;
+  background-color: #ffebee;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 4px;
+  border: 1px solid #ffcdd2;
 }
 
 .input-group {
