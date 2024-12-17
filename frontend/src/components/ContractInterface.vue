@@ -53,7 +53,7 @@ export default defineComponent({
         await provider.send('eth_requestAccounts', [])
         const signer = provider.getSigner()
 
-        // this.contract = new ethers.Contract('YOUR_CONTRACT_ADDRESS', MyContractABI.abi, signer)
+        this.contract = new ethers.Contract('YOUR_CONTRACT_ADDRESS', MyContractABI.abi, signer)
 
         this.isConnected = true
         this.provider = provider
